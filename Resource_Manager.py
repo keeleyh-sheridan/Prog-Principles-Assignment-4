@@ -2,11 +2,19 @@
 
 import Data_Persistence as file_data
 
-def add():
-    pass
+def add(item):
+    new_file = file_data.load_file()
 
-def remove():
-    pass
+    new_file.append(item)
+
+    file_data.save_file(new_file)
+
+def remove(index):
+    new_file = file_data.load_file()
+
+    new_file.pop(index)
+
+    file_data.save_file(new_file)
 
 def update():
     pass
