@@ -2,6 +2,7 @@ import Resource_Manager as rm
 
 #interaction with the user
 
+#Main menu for user interaction
 def menu():
     while True:
         print('''
@@ -28,6 +29,7 @@ def menu():
         else:
             print("Invalid option selected")
 
+#Create a pedal dict object and return it to resource manager
 def create_pedal():
     item = {}
     item["name"] = input("Enter the name of added guitar pedal: ")
@@ -48,10 +50,13 @@ def create_pedal():
     rm.add(item)
     print(f"The pedal has been added and has unique ID number: {item['ID']}")
     
+#Print all pedals that match any terms submitted by the user
 def read():
     print(rm.get_items(input("Enter one or more attributes (in the same line) or enter 'all' to read all items: "))[0])
 
+#Edit a pedal and pass it to resource manager
 def edit():
+    #Find the pedal to edit
     ID = input("Enter the ID of the item you would like to edit: ")
     index = rm.search_index(ID)
 
@@ -63,6 +68,7 @@ def edit():
 
     print(f"You are editing: {info_string}")
 
+    #Loop containing code for editing the dict object
     while True:
         for key, value in edit_pedal.items():
             if key == "ID":
@@ -93,6 +99,7 @@ def edit():
                 rm.update(index, edit_pedal)
                 return
 
+#Delete a pedal
 def delete():
     index = rm.search_index(input("Enter the ID of the item you would like to delete: "))
 
@@ -101,4 +108,9 @@ def delete():
     else:
         rm.remove(index)
 
+print('''
+Welcome to my guitar pedalboard manager app!
+Guitar pedals are devices that can change how an electric guitar sounds,
+they all have different functionalities and parameters.
+This app allows you to manage which ones are in your collection.\n''')
 menu()
