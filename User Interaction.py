@@ -37,15 +37,15 @@ def create_pedal():
         if new_parameter.lower() == "done":
             break
 
-        parameters.append(new_parameter)
+        parameters.append(new_parameter.lower())
     item["parameters"] = parameters
 
+    item["ID"] = rm.generate_ID()
+
     rm.add(item)
+    print(f"The pedal has been added and has unique ID number: {item['ID']}")
     
 def read():
     print(rm.get_items(input("Enter one or more attributes (in the same line) or enter 'all' to read all items: ")))
-    
-def item_info():
-    pass
 
 menu()
