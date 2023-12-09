@@ -1,1 +1,1 @@
-[{"name": "Dist+", "type": "distortion", "parameters": ["gain", "vol"], "ID": "111"}, {"name": "Fuzz Face", "type": "Fuzz", "parameters": ["fuzz", "vol", "tone"], "ID": "222"}]
+[{"name": "Dist+", "type": "distortion", "parameters": ["gain", "vol"], "ID": "111"}, {"name": "Fuzz Face", "type": "Fuzz", "parameters": ["fuzz", "vol", "tone"], "ID": "222"}, {"name": "Caverns", "type": "Reverb", "parameters": ["delay", "vol", "shimmer"], "ID": "868"}]

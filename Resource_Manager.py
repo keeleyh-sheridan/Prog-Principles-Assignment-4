@@ -32,11 +32,11 @@ def generate_id():
     for item in new_file:
         all_ids += f" {item['ID']}"
 
-    ID = random.randint(111,999)
+    ID = str(random.randint(111,999))
     while ID in all_ids:
-        ID = random.randint(111,999)
+        ID = str(random.randint(111,999))
 
-    return str(ID)
+    return ID
 
 def get_items(search_term):  
     new_file = file_data.load_file()
@@ -48,13 +48,14 @@ def get_items(search_term):
             info_string += f"{item['name']} {item['type']} pedal: {item['parameters']} ID: {item['ID']}\n"
         else:
             for key, value in item.items():
-                try:
-                    if str(value).lower() in search_term.lower():
-                       info_string += f"{item['name']} {item['type']} pedal: {item['parameters']} ID: {item['ID']}\n"
-                       item_dict = item
-                except TypeError:
+                if key == "parameters":
                     for list_item in value:
                         if list_item in search_term.lower():
                             info_string += f"{item['name']} {item['type']} pedal: {item['parameters']}\n"
                             item_dict = item
+                else:
+                    if str(value).lower() in search_term.lower():
+                        info_string += f"{item['name']} {item['type']} pedal: {item['parameters']} ID: {item['ID']}\n"
+                        item_dict = item
+                    
     return info_string, item_dict
