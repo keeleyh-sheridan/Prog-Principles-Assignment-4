@@ -19,5 +19,29 @@ def remove(index):
 def update():
     pass
 
-def search():
-    pass
+def search(search_term):
+    new_file = file_data.load_file()
+
+    for item in new_file:
+        for info in item:
+            if search_term == info:
+                return new_file.index(item)
+
+
+def get_items(search_term):  
+    new_file = file_data.load_file()
+
+    info_string = ""
+    for item in new_file:
+        if search_term.lower() == "all":
+            info_string += f"{item['name']} {item['type']} pedal: {item['parameters']}\n"
+        else:
+            for key, value in item.items():
+                try:
+                    if value.lower() in search_term.lower():
+                       info_string += f"{item['name']} {item['type']} pedal: {item['parameters']}\n"
+                except TypeError:
+                    for list_item in value:
+                        if list_item.lower() in search_term.lower():
+                            info_string += f"{item['name']} {item['type']} pedal: {item['parameters']}\n"
+    return info_string

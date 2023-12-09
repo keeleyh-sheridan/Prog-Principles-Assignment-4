@@ -1,1 +1,1 @@
-[{"name": "Rat", "type": "distortion", "parameters": ["gain", "vol"]}]
+[{"name": "Rat", "type": "distortion", "parameters": ["gain", "vol"]}, {"name": "Big Muff", "type": "Fuzz", "parameters": ["fuzz", "vol", "tone"]}]

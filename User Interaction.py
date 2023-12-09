@@ -7,17 +7,17 @@ def menu():
         print('''
 -----------------------
 1. Create
-2. Read
+2. Read(Search)
 3. Edit
 4. Delete
 5. Exit
-------------------------''')
+-----------------------''')
         
         selection = input("Choose an option from the menu: ")
         if selection == "1":
             create_pedal()
         elif selection == "2":
-            pass
+            read()
         elif selection == "3":
             pass
         elif selection == "4":
@@ -42,6 +42,8 @@ def create_pedal():
 
     rm.add(item)
     
+def read():
+    print(rm.get_items(input("Enter one or more attributes (in the same line) or enter 'all' to read all items: ")))
     
 def item_info():
     pass
