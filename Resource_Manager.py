@@ -22,12 +22,13 @@ def update(index, new_item):
     file_data.save_file(new_file)
 
 #Find the index of an item in Resource json and return it
-def search_index(id):
+def search_index(ID):
     new_file = file_data.load_file()
 
     for item in new_file:
-        if id == item["ID"]:
+        if ID == item["ID"]:
             return new_file.index(item)
+    return -1
 
 #Generate a unique 3 digit number that is no shared by any other items
 def generate_id():
@@ -49,19 +50,23 @@ def get_items(search_term):
 
     info_string = ""
     item_dict = {}
+
+    #Nested loop that checks every value in each dictionary contained by the json for key words that match the user inpu
     for item in new_file:
         if search_term.lower() == "all":
-            info_string += f"{item['name']} {item['type']} pedal: {item['parameters']} ID: {item['ID']}\n"
+            info_string += f"\n{item['name']} {item['type']} pedal: {item['parameters']} ID: {item['ID']}"
         else:
             for key, value in item.items():
                 if key == "parameters":
                     for list_item in value:
                         if list_item in search_term.lower():
-                            info_string += f"{item['name']} {item['type']} pedal: {item['parameters']}\n"
-                            item_dict = item
+                            if item["ID"] not in info_string:
+                                info_string += f"\n{item['name']} {item['type']} pedal: {item['parameters']} ID: {item['ID']}"
+                                item_dict = item
                 else:
                     if str(value).lower() in search_term.lower():
-                        info_string += f"{item['name']} {item['type']} pedal: {item['parameters']} ID: {item['ID']}\n"
-                        item_dict = item
+                        if item["ID"] not in info_string:
+                            info_string += f"\n{item['name']} {item['type']} pedal: {item['parameters']} ID: {item['ID']}"
+                            item_dict = item
                     
     return info_string, item_dict

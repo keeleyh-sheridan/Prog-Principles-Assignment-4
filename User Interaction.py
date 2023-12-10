@@ -48,7 +48,7 @@ def create_pedal():
     item["ID"] = rm.generate_id()
 
     rm.add(item)
-    print(f"The pedal has been added and has unique ID number: {item['ID']}")
+    print(f"\nThe pedal has been added and has unique ID number: {item['ID']}")
     
 #Print all pedals that match any terms submitted by the user
 def read():
@@ -66,18 +66,20 @@ def edit():
     
     info_string, edit_pedal = rm.get_items(ID)
 
-    print(f"You are editing: {info_string}")
+    print(f"\nYou are editing: {info_string}\n")
 
     #Loop containing code for editing the dict object
     while True:
         for key, value in edit_pedal.items():
+            #Don't edit the ID key
             if key == "ID":
                 continue
-
+            #Check if user wants to edit a value
             change_val = "t"
             while change_val not in "yn":
                 change_val = input(f"The {key} of the pedal is {value}. Would you like to edit this?(y/n) ").lower()
             if change_val == "y":
+                #Change value to new input
                 if key == "parameters":
                     parameters = []
                     while True:
@@ -91,12 +93,15 @@ def edit():
                 else:
                     edit_pedal[key] = input("What would you like the new value to be? ")
 
-        print(f"The updated pedal is: {edit_pedal['name']} {edit_pedal['type']} pedal: {edit_pedal['parameters']} ID: {edit_pedal['ID']}\n")
+        print(f"\nThe updated pedal is: {edit_pedal['name']} {edit_pedal['type']} pedal: {edit_pedal['parameters']} ID: {edit_pedal['ID']}")
         change_val = "t"
+        
+        #Exit the loop if user is happy with changes
         while change_val not in "yn":
             change_val = input("Would you like to make more changes?(y/n) ").lower()
             if change_val == "n":
                 rm.update(index, edit_pedal)
+                print("Pedal has been updated")
                 return
 
 #Delete a pedal
@@ -107,6 +112,7 @@ def delete():
         print("ID invalid, item not found")
     else:
         rm.remove(index)
+        print("Removed successfully")
 
 print('''
 Welcome to my guitar pedalboard manager app!
